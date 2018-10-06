@@ -33,11 +33,11 @@ if (input === "concert-this") {
 } else if (input === "spotify-this-song") {
   let song = process.argv.slice(3).join("+");
   spotify
-      .request('https://api.spotify.com/v1/search?q=' + song + "&type=track&limit=1")
+      .request('https://api.spotify.com/v1/search?q=' + song + "&type=track&limit=5")
       .then(function(data) {
         console.log("Keys loaded")
-        for (let i = 0; i < 5; i++) {
-          console.log(i)
+        for (let i = 0; i < data.tracks.items.length; i++) {
+          console.log(i + 1)
           console.log("Artist(s): " + data.tracks.items[i].album.artists[0].name);
           console.log("Song name: " + data.tracks.items[i].name);
           console.log("Preview: " + data.tracks.items[i].preview_url);
@@ -53,7 +53,7 @@ if (input === "concert-this") {
 } else if (input === "movie-this") {
 
   let movieName = process.argv.slice(3).join("+")
-  let queryURL = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy"
+  let queryURL = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=full&apikey=trilogy"
 
   request(queryURL, function(error, response, body) {
     if (error) {
@@ -130,8 +130,8 @@ if (input === "concert-this") {
             .request('https://api.spotify.com/v1/search?q=' + song + "&type=track&limit=5")
             .then(function(data) {
               console.log("Keys loaded")
-              for (let i = 0; i < 5; i++) {
-                console.log(i)
+              for (let i = 0; i < data.tracks.items.length; i++) {
+                console.log(i + 1)
                 console.log("Artist(s): " + data.tracks.items[i].album.artists[0].name);
                 console.log("Song name: " + data.tracks.items[i].name);
                 console.log("Preview: " + data.tracks.items[i].preview_url);
